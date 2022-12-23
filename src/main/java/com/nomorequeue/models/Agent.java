@@ -47,6 +47,10 @@ public class Agent implements Serializable {
     @Nullable
     @OneToOne
     private Role role;
+    
+    @Nullable
+    @OneToOne
+    private Privilege privilege;
    
     @Nullable
     @OneToOne
@@ -127,6 +131,14 @@ public class Agent implements Serializable {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Privilege getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Privilege privilege) {
+        this.privilege = privilege;
     }
  
 }

@@ -4,16 +4,13 @@
  */
 package com.nomorequeue.Respository;
 
-import com.nomorequeue.models.Agent;
-import com.nomorequeue.models.Company;
-import java.util.List;
-import org.springframework.data.repository.CrudRepository;
+import com.nomorequeue.models.Traitement;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author CYRILLE DJAMARA
  */
-public interface AgentRepository extends CrudRepository<Agent, Long>{
+public interface TraitementRepository extends JpaRepository<Traitement, Long> {
     
-    List<Agent> findByCompany(Company company);
 }

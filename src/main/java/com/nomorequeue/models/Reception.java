@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  *
@@ -142,7 +144,5 @@ public class Reception implements Serializable {
     public void setTicket_top_actif(Boolean ticket_top_actif) {
         this.ticket_top_actif = ticket_top_actif;
     }
-    
-    
-    
+
 }
