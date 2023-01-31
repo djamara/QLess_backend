@@ -15,6 +15,12 @@
 ##EXPOSE 8080
 
 ##CMD java -jar nomorequeue_backend.jar
-FROM maven:3.8.3-openjdk-17
+##FROM maven:3.8.3-openjdk-17
  
-RUN echo "Hello World"
+##RUN echo "Hello World"
+
+FROM maven:3.8.3-openjdk-17
+
+FROM java:17
+COPY --from=0 /usr/src/app/target/nomorequeue-0.0.1-SNAPSHOT.jar /opt/nomorequeue_backend.jar
+CMD ["java","-jar","/opt/nomorequeue_backend.jar"]
