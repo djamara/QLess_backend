@@ -13,5 +13,4 @@ phases:
       - docker build . -t nomorequeue_backend
   build:
     commands:
-      - docker tag nomorequeue_backend:latest 158911092652.dkr.ecr.us-west-2.amazonaws.com/nomorequeue_backend:latest
-      - docker push 158911092652.dkr.ecr.us-west-2.amazonaws.com/nomorequeue_backend:latest
+      - docker run nomorequeue_backend
