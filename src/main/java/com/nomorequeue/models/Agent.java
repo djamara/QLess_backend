@@ -23,7 +23,7 @@ import java.io.Serializable;
 @Entity
 public class Agent implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @NotBlank

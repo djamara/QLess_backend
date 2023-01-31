@@ -1,0 +1,8 @@
+## YAML Template.
+---
+version: '3.5.3'
+services:
+  nomorequeue:
+    image: "258092/nomorequeue"
+    ports:
+      - "8080:8080"

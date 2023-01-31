@@ -4,15 +4,13 @@
  */
 package com.nomorequeue.Respository;
 
-import com.nomorequeue.models.Company;
-import com.nomorequeue.models.Service;
-import java.util.List;
+import com.nomorequeue.models.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 /**
  *
  * @author CYRILLE DJAMARA
  */
-public interface ServiceRespository extends JpaRepository<Service, Long>{
+public interface EventRepository extends JpaRepository<Event, Long>{
     
-    List<Service> findByCompany(Company company);
 }

@@ -4,10 +4,12 @@
  */
 package com.nomorequeue.models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -28,6 +30,13 @@ public class Company implements Serializable {
     private String company_name;
    
     private Boolean company_topActif = Boolean.TRUE; 
+    
+    @Nullable
+    @OneToOne
+    Industry industry;
+    
+    @Nullable
+    String industry_other;
 
     public Long getId() {
         return id;
@@ -52,5 +61,22 @@ public class Company implements Serializable {
     public void setCompany_topActif(Boolean company_topActif) {
         this.company_topActif = company_topActif;
     }
+
+    public Industry getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Industry industry) {
+        this.industry = industry;
+    }
+
+    public String getIndustry_other() {
+        return industry_other;
+    }
+
+    public void setIndustry_other(String industry_other) {
+        this.industry_other = industry_other;
+    }
     
+      
 }
