@@ -2,7 +2,8 @@
 # Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 # Click nbfs://nbhost/SystemFileSystem/Templates/Other/Dockerfile to edit this template
 
-FROM ubuntu:latest
+#FROM ubuntu:latest
+FROM public.ecr.aws/lts/ubuntu:latest
 
 RUN \
 # Update
