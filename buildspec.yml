@@ -15,7 +15,3 @@ phases:
       - docker build -t 258092/nomorequeue .
       - docker tag nomorequeue_backend:latest 158911092652.dkr.ecr.us-west-2.amazonaws.com/nomorequeue_backend:latest
       - docker push 158911092652.dkr.ecr.us-west-2.amazonaws.com/nomorequeue_backend:latest
-      
-  artifacts:
-    files:
-        - imagedefinitions.json
