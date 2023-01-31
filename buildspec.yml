@@ -12,4 +12,4 @@ phases:
       - docker build . -t nomorequeue_backend
   build:
     commands:
-      - docker run nomorequeue_backend
+      - docker run -it --rm nomorequeue_backend
