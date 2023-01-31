@@ -10,7 +10,7 @@ apt-get update -y && \
 # Install Java
 apt-get install -y openjdk-17-jdk
 
-ADD ./target/nomorequeue-0.0.1-SNAPSHOT.jar nomorequeue.jar
+ADD ./target/nomorequeue-0.0.1-SNAPSHOT.jar nomorequeue_backend.jar
 EXPOSE 8080
 
-CMD java -jar nomorequeue.jar
+CMD java -jar nomorequeue_backend.jar
