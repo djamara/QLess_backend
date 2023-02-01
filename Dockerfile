@@ -15,11 +15,19 @@
 ##EXPOSE 8080
 
 ##CMD java -jar nomorequeue_backend.jar
-##FROM maven:3.8.3-openjdk-17
+
+FROM maven:3.8.3-openjdk-17 as MAVEN_BUILD
+
+#copy the pom and source code to the container
+COPY ./ ./
+
+# package our application code
+RUN mvn clean package
+
 FROM openjdk:17-jdk-slim-buster
 
 COPY ./target/nomorequeue-0.0.1-SNAPSHOT.jar nomorequeue_backend.jar
-EXPOSE 8080
+##EXPOSE 8080
 CMD ["java", "-jar", "nomorequeue_backend.jar"]
 ##CMD ["in.png"]
  
