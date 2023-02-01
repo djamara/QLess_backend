@@ -26,11 +26,8 @@ RUN mvn clean package
 
 FROM openjdk:17-jdk-slim-buster
 
-COPY ./target/nomorequeue-0.0.1-SNAPSHOT.jar nomorequeue_backend.jar
+# copy only the artifacts we need from the first stage and discard the rest
+COPY --from=MAVEN_BUILD ./target/nomorequeue-0.0.1-SNAPSHOT.jar nomorequeue_backend.jar
+
 ##EXPOSE 8080
 CMD ["java", "-jar", "nomorequeue_backend.jar"]
-##CMD ["in.png"]
- 
-##RUN echo "Hello World"
-
-
