@@ -38,6 +38,7 @@ import java.util.Base64;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -94,10 +95,11 @@ public class RegistrationController {
        
        registration.setPerson(person);
        
-       this.getQrCode();
+       registration = this.registration_crud.save(registration);
        
-       return this.registration_crud.save(registration);
-       //return registration;
+       this.getQrCode(registration.getId().toString());
+       
+       return registration;
     }
     
     @GetMapping("/get-all-registration")
@@ -106,10 +108,10 @@ public class RegistrationController {
     }
     
     @GetMapping("/getqrcode")
-    public String getQrCode(){
+    public String getQrCode(String id){
         
         String medium="https://rahul26021999.medium.com/";
-        String github="https://www.kuibli-mi.fr";
+        String github="https://localhost:4200/#/display/"+id;
         
         byte[] image = new byte[0];
         try{
@@ -130,23 +132,36 @@ public class RegistrationController {
     
     @PostMapping("/send-email")
     public void sendMail() {
+        String to = "sonoojaiswal1988@gmail.com";//change accordingly  
+        String from = "djamaracyrille@gmail.com";//change accordingly  
+        String host = "localhost";//or IP address 
+        
         Properties props = new Properties();
-        Session session = Session.getDefaultInstance(props, null);
+        props.put("mail.smtp.host", "smtp.gmail.com");    
+        props.put("mail.smtp.socketFactory.port", "465");    
+        props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");    
+        props.put("mail.smtp.auth", "true");    
+        props.put("mail.smtp.port", "465");  
+          
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {    
+           @Override
+           protected PasswordAuthentication getPasswordAuthentication() {    
+           return new PasswordAuthentication(from,"Mercijesus92*");  
+           } 
+        });
 
         try {
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("djamaracyrille@gmail.com", "Example.com Admin"));
-            msg.addRecipient(Message.RecipientType.TO,
-                    new InternetAddress("djamara.edju@gmail.com", "Mr. User"));
-            msg.setSubject("Your Example.com account has been activated");
+            msg.setFrom(new InternetAddress("djamaracyrille@gmail.com"));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress("djamara.edju@gmail.com"));
+            msg.setSubject("Your email test has been sent");
             msg.setText("This is a test");
             Transport.send(msg);
         } catch (AddressException e) {
             // ...
-        } catch (MessagingException e) {
-            // ...
-        } catch (UnsupportedEncodingException e) {
+        }catch (MessagingException e) {
             // ...
         }
+        
     }
 }
