@@ -4,11 +4,13 @@
  */
 package com.nomorequeue.models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Null;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -21,7 +23,7 @@ import java.sql.Timestamp;
 public class Traitement implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @OneToOne
@@ -29,6 +31,11 @@ public class Traitement implements Serializable {
     
     @OneToOne
     private Agent agent;
+    
+    @Nullable
+    @OneToOne
+    private Agent recipiendaire;
+    
     private String status;
             
     private Date ticket_date_update;
@@ -43,6 +50,14 @@ public class Traitement implements Serializable {
         this.id = id;
     }
 
+    public Agent getRecipiendaire() {
+        return recipiendaire;
+    }
+
+    public void setRecipiendaire(Agent recipiendaire) {
+        this.recipiendaire = recipiendaire;
+    }
+
     public Reception getReception() {
         return reception;
     }
@@ -54,7 +69,7 @@ public class Traitement implements Serializable {
     public Agent getAgent() {
         return agent;
     }
-
+    
     public void setAgent(Agent agent) {
         this.agent = agent;
     }

@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/env")
+@RequestMapping("/trait_service/env")
 public class IndustryController {
     
     @Autowired

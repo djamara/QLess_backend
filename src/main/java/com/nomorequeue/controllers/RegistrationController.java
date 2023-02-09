@@ -51,7 +51,7 @@ import javax.mail.internet.MimeMessage;
  */
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/event")
+@RequestMapping("/trait_service/event")
 public class RegistrationController {
     
     @Autowired

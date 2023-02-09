@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/agent")
+@RequestMapping("/trait_service/agent")
 public class AgentController {
     
     @Autowired

@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/reception")
+@RequestMapping("/trait_service/reception")
 public class ReceptionController {
     
     @Autowired
@@ -66,7 +66,7 @@ public class ReceptionController {
        reception.setTicket_date_creation(datesql);
        reception.setTicket_heure_creation(time);
        
-       reception.setTicket_top_actif(Boolean.TRUE);
+       reception.setTicket_top_actif(1);
        
        return crud.save(reception);
        //return reception;

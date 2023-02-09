@@ -24,7 +24,7 @@ import java.sql.Timestamp;
 public class Reception implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @NotBlank
@@ -52,7 +52,7 @@ public class Reception implements Serializable {
     @OneToOne
     private Company company;
      
-    private Boolean ticket_top_actif = Boolean.TRUE;
+    private int ticket_top_actif = 1;
 
     public Company getCompany() {
         return company;
@@ -134,11 +134,11 @@ public class Reception implements Serializable {
         this.service = service;
     }
 
-    public Boolean getTicket_top_actif() {
+    public int getTicket_top_actif() {
         return ticket_top_actif;
     }
 
-    public void setTicket_top_actif(Boolean ticket_top_actif) {
+    public void setTicket_top_actif(int ticket_top_actif) {
         this.ticket_top_actif = ticket_top_actif;
     }
 

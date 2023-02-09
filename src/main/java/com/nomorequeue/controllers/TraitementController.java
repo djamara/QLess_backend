@@ -4,7 +4,9 @@
  */
 package com.nomorequeue.controllers;
 
+import com.nomorequeue.Respository.ReceptionRepository;
 import com.nomorequeue.Respository.TraitementRepository;
+import com.nomorequeue.models.Reception;
 import com.nomorequeue.models.Traitement;
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -22,11 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/traitement")
+@RequestMapping("/trait_service/traitement")
 public class TraitementController {
     
     @Autowired
     TraitementRepository trait_crud;
+    
+    @Autowired
+    ReceptionRepository recep_crud;
     
     @PostMapping("update-traitement")
     public Traitement updatetraitement(@RequestBody Traitement traitement){
@@ -40,6 +45,9 @@ public class TraitementController {
        
        traitement.setTicket_date_update(datesql);
        traitement.setTicket_heure_update(time);
+       
+       Reception recep = traitement.getReception();
+       this.recep_crud.save(recep);
        
        return trait_crud.save(traitement);
     }
