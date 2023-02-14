@@ -41,7 +41,17 @@ public class User implements Serializable {
    @OneToOne
    private Company company;
    
+   private String codeActivation;
+   
    private Boolean topActif = Boolean.TRUE;
+
+    public String getCodeActivation() {
+        return codeActivation;
+    }
+
+    public void setCodeActivation(String codeActivation) {
+        this.codeActivation = codeActivation;
+    }
 
     public Long getId() {
         return id;

@@ -17,6 +17,7 @@ import com.nomorequeue.models.User;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  *
@@ -90,6 +92,9 @@ public class UserController {
             agent.setRole(role);
         }
         
+        String generatedString = RandomStringUtils.randomAlphanumeric(7); // generate password   
+        
+        user.setPassword(generatedString);
         user.setAgent(agent);
         user.setCompany(company);
         

@@ -7,13 +7,14 @@ package com.nomorequeue.Respository;
 import com.nomorequeue.models.Company;
 import com.nomorequeue.models.Role;
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author CYRILLE DJAMARA
  */
-public interface RoleRepository extends CrudRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
     
     List<Role> findByCompany(Company company);
 }
