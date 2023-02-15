@@ -82,15 +82,22 @@ public class UserController {
     @PostMapping("add-user")
     public User addUser(@Valid @RequestBody User user){
         
+        Company company = this.company_crud.save(user.getCompany()); //creer la company
         
-        Agent agent = this.agent_crud.save(user.getAgent());
-        Company company = company_crud.save(user.getCompany());
-        Role role;
-        //if there is no role provided, that means it's the Admin
+        Agent agent = user.getAgent();
+        agent.setCompany(company);
+        
+        //if there is no role provided, we create Admin
         if(user.getAgent().getRole() == null){
-            role = this.role_crud.findById(Long.valueOf(102)).get();
+            Role role = new Role();
+            role.setCompany(company);
+            role.setRole_name("Administrateur");
+            role = this.role_crud.save(role); // save the role
+            
             agent.setRole(role);
+            
         }
+        agent = this.agent_crud.save(agent); // save agent 
         
         String generatedString = RandomStringUtils.randomAlphanumeric(7); // generate password   
         

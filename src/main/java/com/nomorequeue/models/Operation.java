@@ -9,39 +9,43 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author CYRILLE DJAMARA
  */
 @Entity
-public class Role implements Serializable {
-    
+public class Operation implements Serializable {
+       
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @NotBlank
     @NotNull
-    private String role_name;
+    private String libelle;
+    
+    @OneToOne
+    @Nullable
+    private Service service;
     
     @Nullable
     @OneToOne
     private Company company;
     
     private Boolean role_topActif = Boolean.TRUE;
-    
-    /*@NotEmpty
-    @ManyToMany
-    private List<Privilege> privileges;*/
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
 
     public Long getId() {
         return id;
@@ -51,12 +55,20 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public String getRole_name() {
-        return role_name;
+    public String getLibelle() {
+        return libelle;
     }
 
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Boolean getRole_topActif() {
@@ -65,22 +77,6 @@ public class Role implements Serializable {
 
     public void setRole_topActif(Boolean role_topActif) {
         this.role_topActif = role_topActif;
-    }
-
-//    public List<Privilege> getPrivileges() {
-//        return privileges;
-//    }
-//
-//    public void setPrivileges(ArrayList<Privilege> privileges) {
-//        this.privileges = privileges;
-//    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
     
     

@@ -13,6 +13,7 @@ import com.nomorequeue.models.Departement;
 import com.nomorequeue.models.User;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +59,9 @@ public class AgentController {
         user.setLogin(agent.getEmail());
         user.setAgent(agent);
         user.setCompany(agent.getCompany());
+        
+        String generatedString = RandomStringUtils.randomAlphanumeric(7); // generate password 
+        user.setPassword(generatedString);
         this.user_crud.save(user);
         return agent;
     }

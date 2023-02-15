@@ -9,12 +9,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
+import org.hibernate.annotations.ManyToAny;
 
 /**
  *
@@ -55,11 +58,24 @@ public class Agent implements Serializable {
     @Nullable
     @OneToOne
     private Company company;
+    
+    @Nullable
+    @ManyToAny
+    private List<Operation>operations;
    
     @Nullable
     @OneToOne
     @Valid
     private Service service;
+
+    public List<Operation> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(List<Operation> operations) {
+        this.operations = operations;
+    }
+    
 
     public Role getRole() {
         return role;
