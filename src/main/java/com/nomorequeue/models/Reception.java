@@ -47,12 +47,20 @@ public class Reception implements Serializable {
     
     @Valid
     @OneToOne
-    private Service service;
+    private Operation operation;
     
     @OneToOne
     private Company company;
      
     private int ticket_top_actif = 1;
+    
+     public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
 
     public Company getCompany() {
         return company;
@@ -126,14 +134,6 @@ public class Reception implements Serializable {
         this.ticket_heure_creation = ticket_heure_creation;
     }
     
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
-    }
-
     public int getTicket_top_actif() {
         return ticket_top_actif;
     }
