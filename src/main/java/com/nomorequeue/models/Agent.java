@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.Valid;
@@ -53,14 +54,18 @@ public class Agent implements Serializable {
     
     @Nullable
     @OneToOne
-    private Privilege privilege;
+    private Guichet guichet;
+    
+    @Nullable
+    @ManyToMany
+    private List<Privilege> privileges;
    
     @Nullable
     @OneToOne
     private Company company;
     
     @Nullable
-    @ManyToAny
+    @ManyToMany
     private List<Operation>operations;
    
     @Nullable
@@ -68,6 +73,14 @@ public class Agent implements Serializable {
     @Valid
     private Service service;
 
+    public Guichet getGuichet() {
+        return guichet;
+    }
+
+    public void setGuichet(Guichet guichet) {
+        this.guichet = guichet;
+    }
+    
     public List<Operation> getOperations() {
         return operations;
     }
@@ -149,12 +162,12 @@ public class Agent implements Serializable {
         this.company = company;
     }
 
-    public Privilege getPrivilege() {
-        return privilege;
+    public List<Privilege> getPrivileges() {
+        return privileges;
     }
 
-    public void setPrivilege(Privilege privilege) {
-        this.privilege = privilege;
+    public void setPrivileges(List<Privilege> privileges) {
+        this.privileges = privileges;
     }
  
 }

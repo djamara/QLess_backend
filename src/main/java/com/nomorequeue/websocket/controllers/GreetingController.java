@@ -18,6 +18,7 @@ import org.springframework.web.util.HtmlUtils;
 @Controller
 public class GreetingController {
     
+    
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public String greeting(String ticket_number){
@@ -25,6 +26,12 @@ public class GreetingController {
         return ticket_number;
     }
     
+    @MessageMapping("/transfert")
+    @SendTo("/topic/transfert")
+    public String transfert(String destinataire){
+        //return new Greeting("Hello, " + HtmlUtils.htmlEscape(ticket_number) + "!");
+        return destinataire;
+    }
     
     @MessageMapping("/hel")
     @SendTo("/topic/greetin")

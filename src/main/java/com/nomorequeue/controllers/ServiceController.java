@@ -5,11 +5,15 @@
 package com.nomorequeue.controllers;
 
 import com.nomorequeue.Respository.CompanyRepository;
+import com.nomorequeue.Respository.GuichetRepository;
 import com.nomorequeue.Respository.OperationRepository;
+import com.nomorequeue.Respository.PrivilegeRepository;
 import com.nomorequeue.Respository.RoleRepository;
 import com.nomorequeue.Respository.ServiceRespository;
 import com.nomorequeue.models.Company;
+import com.nomorequeue.models.Guichet;
 import com.nomorequeue.models.Operation;
+import com.nomorequeue.models.Privilege;
 import com.nomorequeue.models.Role;
 import com.nomorequeue.models.Service;
 import jakarta.validation.Valid;
@@ -41,7 +45,13 @@ public class ServiceController {
     RoleRepository role_crud;
     
     @Autowired
+    PrivilegeRepository privilege_crud;
+    
+    @Autowired
     OperationRepository operation_crud;
+    
+    @Autowired
+    GuichetRepository guichet_crud;
     
     @GetMapping("/get-all-service")
     public Iterable<Service> getAllService(){
@@ -82,6 +92,23 @@ public class ServiceController {
     @PostMapping("/add-operation")
     public Operation addOperation(@Valid @RequestBody Operation operation){
         return operation_crud.save(operation);
+    }
+    
+    @PostMapping("/add-guichet")
+    public Guichet addGuichet(@Valid @RequestBody Guichet guichet){
+        return guichet_crud.save(guichet);
+    }
+    
+    @GetMapping("get-company-guichet")
+    public List<Guichet> getAllGuichetByCompany(@RequestParam Long idcompany){
+        Company company = this.company_crud.findById(idcompany).get() ;
+        return guichet_crud.findByCompany(company);
+        //return crud.getReceptionByCompany(idcompany);
+    }
+    
+    @GetMapping("get-all-privilege")
+    public Iterable<Privilege> getAllParameterCompany(){
+        return privilege_crud.findAll();
     }
     
 }

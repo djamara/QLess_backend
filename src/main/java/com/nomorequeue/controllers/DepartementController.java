@@ -43,7 +43,7 @@ public class DepartementController {
         return crud.findAll();
     }
     
-     @GetMapping("get-company-depart")
+    @GetMapping("get-company-depart")
     public List<Departement> getAllDepartByCompany(@RequestParam Long idcompany){
         Company company = this.company_crud.findById(idcompany).get() ;
         return crud.findByCompany(company);

@@ -5,7 +5,7 @@
 package com.nomorequeue.Respository;
 
 import com.nomorequeue.models.Company;
-import com.nomorequeue.models.Traitement;
+import com.nomorequeue.models.Guichet;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author CYRILLE DJAMARA
  */
-public interface TraitementRepository extends JpaRepository<Traitement, Long> {
-    List<Traitement> findByCompany(Company company);
-    List<Traitement> findByCompanyAndStatus(Company company,String status);
+public interface GuichetRepository extends JpaRepository<Guichet, Long> {
+    
+    List<Guichet> findByCompany(Company company);
 }

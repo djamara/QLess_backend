@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import java.io.Serializable;
 import java.sql.Date;
@@ -36,11 +37,34 @@ public class Traitement implements Serializable {
     @OneToOne
     private Agent recipiendaire;
     
+    @NotNull
+    @OneToOne
+    private Company company;
+    
     private String status;
+    
+    private String commentaire;
             
     private Date ticket_date_update;
     private Timestamp ticket_heure_update;
     private Boolean traitement_topActif = Boolean.TRUE;
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
 
     public Long getId() {
         return id;
