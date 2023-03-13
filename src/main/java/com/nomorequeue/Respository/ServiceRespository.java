@@ -15,4 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ServiceRespository extends JpaRepository<Service, Long>{
     
     List<Service> findByCompany(Company company);
+    Service findByCompanyAndId(Company company,Long id);
 }

@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author CYRILLE DJAMARA
  */
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/trait_service/departement")
 public class DepartementController {
@@ -47,6 +47,12 @@ public class DepartementController {
     public List<Departement> getAllDepartByCompany(@RequestParam Long idcompany){
         Company company = this.company_crud.findById(idcompany).get() ;
         return crud.findByCompany(company);
+    }
+    
+    @GetMapping("get-company-depart_by_ID")
+    public Departement getAllDepartByCompanyAndID(@RequestParam Long idcompany,@RequestParam Long idDepart){
+        Company company = this.company_crud.findById(idcompany).get() ;
+        return crud.findByCompanyAndId(company,idDepart);
     }
     
     @PostMapping("/add-depart")

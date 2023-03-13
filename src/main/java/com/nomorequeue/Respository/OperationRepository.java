@@ -16,4 +16,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface OperationRepository extends JpaRepository<Operation, Long> {
     
     List<Operation> findByCompany(Company company);
+    Operation findByCompanyAndId(Company company, Long idOperation);
 }

@@ -14,7 +14,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
+import org.springframework.data.relational.core.mapping.Column;
 
 /**
  *
@@ -47,7 +49,17 @@ public class Traitement implements Serializable {
             
     private Date ticket_date_update;
     private Timestamp ticket_heure_update;
+    
+    private Time duree_traitement;
     private Boolean traitement_topActif = Boolean.TRUE;
+
+    public Time getDuree_traitement() {
+        return duree_traitement;
+    }
+
+    public void setDuree_traitement(Time duree_traitement) {
+        this.duree_traitement = duree_traitement;
+    }
 
     public String getCommentaire() {
         return commentaire;

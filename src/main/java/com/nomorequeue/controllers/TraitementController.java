@@ -4,9 +4,11 @@
  */
 package com.nomorequeue.controllers;
 
+import com.nomorequeue.Respository.AgentRepository;
 import com.nomorequeue.Respository.CompanyRepository;
 import com.nomorequeue.Respository.ReceptionRepository;
 import com.nomorequeue.Respository.TraitementRepository;
+import com.nomorequeue.models.Agent;
 import com.nomorequeue.models.Company;
 import com.nomorequeue.models.Departement;
 import com.nomorequeue.models.Reception;
@@ -28,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author CYRILLE DJAMARA
  */
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/trait_service/traitement")
 public class TraitementController {
@@ -41,6 +43,9 @@ public class TraitementController {
     
     @Autowired
     CompanyRepository company_crud;
+    
+    @Autowired
+    AgentRepository agent_crud;
     
     @PostMapping("update-traitement")
     public Traitement updatetraitement(@RequestBody Traitement traitement){
@@ -61,10 +66,23 @@ public class TraitementController {
        return trait_crud.save(traitement);
     }
     
-    @GetMapping("get-company-traitement")
-    public List<Traitement> getAllDepartByCompany(@RequestParam Long idcompany,String status){
+    @GetMapping("get-company-traitement-by-agent-status")
+    public List<Traitement> getAllDepartByCompany(@RequestParam Long idcompany,@RequestParam String status,@RequestParam Long idagent){
         Company company = this.company_crud.findById(idcompany).get() ;
+        Agent agent = this.agent_crud.findById(idagent).get();
         //return trait_crud.findByCompany(company);
-        return trait_crud.findByCompanyAndStatus(company,status);
+        return trait_crud.findByCompanyAndStatusAndAgent(company,status,agent);
+    }
+    
+    @GetMapping("get-company-traitement-termAndTransf")
+    public List<Traitement> getAllTermAndTransf(@RequestParam Long idcompany,@RequestParam Long idagent){
+        //Company company = this.company_crud.findById(idcompany).get() ;
+        //return trait_crud.findByCompany(company);
+        return trait_crud.getAllTerminAndTransf(idcompany,idagent);
+    }
+    
+    @GetMapping("get-company-traitement-termine")
+    public List<Traitement> getAllTraitTermine(){
+        return trait_crud.getAllTraitTermine();
     }
 }

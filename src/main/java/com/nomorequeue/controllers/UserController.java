@@ -35,7 +35,7 @@ import org.apache.commons.lang3.RandomStringUtils;
  *
  * @author CYRILLE DJAMARA
  */
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/trait_service/user")
 public class UserController {
@@ -80,17 +80,17 @@ public class UserController {
     }
     
     @PostMapping("add-user")
-    public User addUser(@Valid @RequestBody User user){
+    public User addUser(@Valid @RequestBody Agent agent){
         
-        Company company = this.company_crud.save(user.getCompany()); //creer la company
+        //Company company = this.company_crud.save(user.getCompany()); //creer la company
         
-        Agent agent = user.getAgent();
-        agent.setCompany(company);
+        //Agent agent = user.getAgent();
+        //agent.setCompany(company);
         
         //if there is no role provided, we create Admin
-        if(user.getAgent().getRole() == null){
+        if(agent.getRole() == null){
             Role role = new Role();
-            role.setCompany(company);
+            role.setCompany(agent.getCompany());
             role.setRole_name("Administrateur");
             role = this.role_crud.save(role); // save the role
             
@@ -101,9 +101,10 @@ public class UserController {
         
         String generatedString = RandomStringUtils.randomAlphanumeric(7); // generate password   
         
+        User user = new User();
         user.setPassword(generatedString);
         user.setAgent(agent);
-        user.setCompany(company);
+        user.setCompany(agent.getCompany());
         
         return this.user_crud.save(user);
     }

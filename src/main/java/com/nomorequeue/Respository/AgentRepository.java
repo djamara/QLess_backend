@@ -6,6 +6,7 @@ package com.nomorequeue.Respository;
 
 import com.nomorequeue.models.Agent;
 import com.nomorequeue.models.Company;
+import com.nomorequeue.models.Service;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,4 +17,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface AgentRepository extends CrudRepository<Agent, Long>{
     
     List<Agent> findByCompany(Company company);
+    List<Agent> findByCompanyAndService(Company company,Service service);
+    Agent findByCompanyAndId(Company company, Long id);
 }

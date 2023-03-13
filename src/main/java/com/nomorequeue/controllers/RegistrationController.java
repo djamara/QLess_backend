@@ -49,7 +49,7 @@ import javax.mail.internet.MimeMessage;
  *
  * @author CYRILLE DJAMARA
  */
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/trait_service/event")
 public class RegistrationController {

@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author CYRILLE DJAMARA
  */
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/trait_service/service")
 public class ServiceController {
@@ -65,6 +65,12 @@ public class ServiceController {
         //return crud.getReceptionByCompany(idcompany);
     }
     
+    @GetMapping("get-company-service-by-ID")
+    public Service getAllServiceByCompanyAndId(@RequestParam Long idcompany, @RequestParam Long idService){
+        Company company = this.company_crud.findById(idcompany).get();
+        return crud.findByCompanyAndId(company,idService);
+    }
+    
     @GetMapping("get-company-role")
     public List<Role> getAllRoleByCompany(@RequestParam Long idcompany){
         Company company = this.company_crud.findById(idcompany).get() ;
@@ -72,11 +78,22 @@ public class ServiceController {
         //return crud.getReceptionByCompany(idcompany);
     }
     
+    @GetMapping("get-company-role-by-ID")
+    public Role getAllRoleByCompanyAndIdRole(@RequestParam Long idcompany, @RequestParam Long idRole){
+        Company company = this.company_crud.findById(idcompany).get() ;
+        return role_crud.findByCompanyAndId(company,idRole);
+    }
+    
     @GetMapping("get-company-operation")
     public List<Operation> getAllOperationByCompany(@RequestParam Long idcompany){
         Company company = this.company_crud.findById(idcompany).get() ;
         return operation_crud.findByCompany(company);
         //return crud.getReceptionByCompany(idcompany);
+    }
+    @GetMapping("get-company-operation-by-ID")
+    public Operation getAllOperationByCompanyAndOperation(@RequestParam Long idcompany, @RequestParam Long idOperation){
+        Company company = this.company_crud.findById(idcompany).get();
+        return operation_crud.findByCompanyAndId(company,idOperation);
     }
     
     @PostMapping("/add-service")
@@ -103,6 +120,13 @@ public class ServiceController {
     public List<Guichet> getAllGuichetByCompany(@RequestParam Long idcompany){
         Company company = this.company_crud.findById(idcompany).get() ;
         return guichet_crud.findByCompany(company);
+        //return crud.getReceptionByCompany(idcompany);
+    }
+    
+    @GetMapping("get-company-guichet-by-ID")
+    public Guichet getAllGuichetByCompanyAndIdGuichet(@RequestParam Long idcompany, @RequestParam Long idGuichet){
+        Company company = this.company_crud.findById(idcompany).get();
+        return guichet_crud.findByCompanyAndId(company,idGuichet);
         //return crud.getReceptionByCompany(idcompany);
     }
     

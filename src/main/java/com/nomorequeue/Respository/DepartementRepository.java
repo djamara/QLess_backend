@@ -15,4 +15,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface DepartementRepository extends CrudRepository<Departement,Long> {
     
     List<Departement> findByCompany(Company company);
+    Departement findByCompanyAndId(Company company,Long id);
 }

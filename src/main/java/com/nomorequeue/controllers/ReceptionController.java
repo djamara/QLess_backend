@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author CYRILLE DJAMARA
  */
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/trait_service/reception")
 public class ReceptionController {

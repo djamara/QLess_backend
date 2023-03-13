@@ -17,4 +17,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface RoleRepository extends JpaRepository<Role, Long> {
     
     List<Role> findByCompany(Company company);
+    Role findByCompanyAndId(Company company, Long Id);
 }

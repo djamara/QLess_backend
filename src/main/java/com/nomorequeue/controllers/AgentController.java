@@ -6,10 +6,12 @@ package com.nomorequeue.controllers;
 
 import com.nomorequeue.Respository.AgentRepository;
 import com.nomorequeue.Respository.CompanyRepository;
+import com.nomorequeue.Respository.ServiceRespository;
 import com.nomorequeue.Respository.UserRepository;
 import com.nomorequeue.models.Agent;
 import com.nomorequeue.models.Company;
 import com.nomorequeue.models.Departement;
+import com.nomorequeue.models.Service;
 import com.nomorequeue.models.User;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -27,10 +29,13 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author CYRILLE DJAMARA
  */
-@CrossOrigin("http://localhost:4200")
+
 @RestController
 @RequestMapping("/trait_service/agent")
 public class AgentController {
+    
+    @Autowired
+    ServiceRespository service_crud;
     
     @Autowired
     AgentRepository crud;
@@ -45,6 +50,21 @@ public class AgentController {
     public List<Agent> getAllAgentByCompany(@RequestParam Long idcompany){
         Company company = this.company_crud.findById(idcompany).get() ;
         return crud.findByCompany(company);
+    }
+    
+    @GetMapping("get-company-agent-by-ID")
+    public Agent getAllAgentByCompany(@RequestParam Long idcompany, @RequestParam Long idAgent){
+        Company company = this.company_crud.findById(idcompany).get();
+        return crud.findByCompanyAndId(company,idAgent);
+    }
+    
+    @GetMapping("get-company-service-agent")
+    public List<Agent> getAllAgentByCompanyService(@RequestParam Long idcompany,@RequestParam Long idservice){
+        Company company = this.company_crud.findById(idcompany).get() ;
+        Service service = this.service_crud.findById(idservice).get();
+        
+        //return crud.findByCompany(company);
+        return crud.findByCompanyAndService(company,service);
     }
     
     @GetMapping("get-all-agent")

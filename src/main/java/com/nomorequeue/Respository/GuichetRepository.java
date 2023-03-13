@@ -16,4 +16,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface GuichetRepository extends JpaRepository<Guichet, Long> {
     
     List<Guichet> findByCompany(Company company);
+    Guichet findByCompanyAndId(Company company, Long id);
 }

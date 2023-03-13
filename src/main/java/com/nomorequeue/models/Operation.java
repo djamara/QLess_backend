@@ -29,6 +29,10 @@ public class Operation implements Serializable {
     @NotNull
     private String libelle;
     
+    @NotBlank
+    @NotNull
+    private String estimation_temps;
+    
     @OneToOne
     @Nullable
     private Service service;
@@ -38,6 +42,15 @@ public class Operation implements Serializable {
     private Company company;
     
     private Boolean role_topActif = Boolean.TRUE;
+
+    public String getEstimation_temps() {
+        return estimation_temps;
+    }
+
+    public void setEstimation_temps(String estimation_temps) {
+        this.estimation_temps = estimation_temps;
+    }
+    
 
     public Service getService() {
         return service;

@@ -104,6 +104,12 @@
                     <artifactId>javax.mail</artifactId>
                     <version>1.5.0-b01</version>
                 </dependency>
+                <!-- marked the embedded servlet container as provided -->
+                <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-tomcat</artifactId>
+                        <scope>provided</scope>
+                </dependency>
 
 	 <dependency>
 	  <groupId>org.apache.servicemix.bundles</groupId>
@@ -120,32 +126,30 @@
 	 <dependency>
 	  <groupId>org.apache.commons</groupId>
 	  <artifactId>commons-lang3</artifactId>
-	  <version>3.12.0</version>
 	  <type>jar</type>
 	 </dependency>
 	 <dependency>
 	  <groupId>com.h2database</groupId>
 	  <artifactId>h2</artifactId>
-	  <version>1.4.200</version>
 	  <type>jar</type>
 	 </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		 <plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-compiler-plugin</artifactId>
-		  <version>2.3.2</version>
-		  <configuration>
-		   <showDeprecation>true</showDeprecation>
-		  </configuration>
-		 </plugin>
+                    <plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-compiler-plugin</artifactId>
+                      <version>2.3.2</version>
+                      <configuration>
+                       <showDeprecation>true</showDeprecation>
+                      </configuration>
+                    </plugin>
 		</plugins>
 	</build>
-
+        <packaging>jar</packaging>
 </project>
