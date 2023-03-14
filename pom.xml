@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.nomorequeue</groupId>
 	<artifactId>nomorequeue</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v1</version>
 	<name>nomorequeue</name>
 	<description>This is the back end of the queue app</description>
 	<properties>
