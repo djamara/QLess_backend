@@ -4,6 +4,7 @@
  */
 package com.nomorequeue.models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -47,12 +48,40 @@ public class Reception implements Serializable {
     
     @Valid
     @OneToOne
+    private TypeReception typeRecep;
+    
+    @Valid
+    @OneToOne
+    @Nullable
     private Operation operation;
+    
+    @Valid
+    @OneToOne
+    @Nullable
+    private Agent agentVisite;
     
     @OneToOne
     private Company company;
      
     private int ticket_top_actif = 1;
+
+    public Agent getAgentVisite() {
+        return agentVisite;
+    }
+
+    public void setAgentVisite(Agent agentVisite) {
+        this.agentVisite = agentVisite;
+    }
+
+    
+    public TypeReception getTypeRecep() {
+        return typeRecep;
+    }
+
+    public void setTypeRecep(TypeReception typeRecep) {
+        this.typeRecep = typeRecep;
+    }
+    
     
      public Operation getOperation() {
         return operation;

@@ -26,7 +26,6 @@ public class NomorequeueApplication extends SpringBootServletInitializer{
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**");
-                                registry.addMapping("/**").allowedOrigins("http://192.168.1.28:4200");
 			}
 		};
 	}

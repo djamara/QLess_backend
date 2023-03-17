@@ -81,6 +81,13 @@ public class TraitementController {
         return trait_crud.getAllTerminAndTransf(idcompany,idagent);
     }
     
+    @GetMapping("get-company-traitement")
+    public List<Traitement> getAllByCompanyAndStatus(@RequestParam Long idcompany,@RequestParam String status){
+        Company company = this.company_crud.findById(idcompany).get() ;
+        //return trait_crud.findByCompany(company);
+        return trait_crud.findByCompanyAndStatus(company, status);
+    }
+    
     @GetMapping("get-company-traitement-termine")
     public List<Traitement> getAllTraitTermine(){
         return trait_crud.getAllTraitTermine();

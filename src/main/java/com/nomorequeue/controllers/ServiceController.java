@@ -10,12 +10,14 @@ import com.nomorequeue.Respository.OperationRepository;
 import com.nomorequeue.Respository.PrivilegeRepository;
 import com.nomorequeue.Respository.RoleRepository;
 import com.nomorequeue.Respository.ServiceRespository;
+import com.nomorequeue.Respository.TypeReceptionRepository;
 import com.nomorequeue.models.Company;
 import com.nomorequeue.models.Guichet;
 import com.nomorequeue.models.Operation;
 import com.nomorequeue.models.Privilege;
 import com.nomorequeue.models.Role;
 import com.nomorequeue.models.Service;
+import com.nomorequeue.models.TypeReception;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,9 @@ public class ServiceController {
     
     @Autowired
     GuichetRepository guichet_crud;
+    
+    @Autowired
+    TypeReceptionRepository type_recep_crud;
     
     @GetMapping("/get-all-service")
     public Iterable<Service> getAllService(){
@@ -133,6 +138,17 @@ public class ServiceController {
     @GetMapping("get-all-privilege")
     public Iterable<Privilege> getAllParameterCompany(){
         return privilege_crud.findAll();
+    }
+    
+    @PostMapping("/add-typeRecep")
+    public TypeReception addTypeReception(@Valid @RequestBody TypeReception typeRecep){
+        return type_recep_crud.save(typeRecep);
+    }
+    
+    @GetMapping("get-all-typeRecep-by-company")
+    public Iterable<TypeReception> getAllTypeReceptionCompany(@RequestParam Long idcompany){
+        Company company = this.company_crud.findById(idcompany).get();
+        return type_recep_crud.findByCompany(company);
     }
     
 }
