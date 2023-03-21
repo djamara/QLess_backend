@@ -72,4 +72,19 @@ public class ReceptionController {
        //return reception;
     }
     
+    @GetMapping("count-weekly-reception")
+    public int getAllWeeklyCount(@RequestParam Long idcompany, String date){
+        //Company company = this.company_crud.findById(idcompany).get() ;
+        return crud.getWeeklyReceptionCountByCompany(idcompany,date);
+        //return crud.getReceptionByCompany(idcompany);
+    }
+    
+    @GetMapping("count-total-reception-top")
+    public int TotalCountWith(@RequestParam Long idcompany, @RequestParam String top){
+        //Company company = this.company_crud.findById(idcompany).get() ;
+        return crud.ReceptionCountByCompanyTop(idcompany,top);
+        //return crud.getReceptionByCompany(idcompany);
+    }
+    
+    
 }

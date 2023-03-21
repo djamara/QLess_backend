@@ -1,3 +1,9 @@
-SELECT * FROM traitement WHERE traitement.reception_id = 64;
-SELECT * FROM traitement WHERE (traitement.`status` ="termine" OR traitement.`status`="en_traitement") AND traitement.agent_id=-45 AND traitement.reception_id=64;
-SELECT TIME_FORMAT(AVG(cast(traitement.ticket_heure_update AS TIME)),"%T") AS "temps moyen de traitement", traitement.agent_id, traitement.reception_id FROM traitement WHERE (traitement.`status` ="termine" OR traitement.`status`="en_traitement") GROUP BY traitement.reception_id;
+SELECT *,TIME_FORMAT(AVG(cast(traitement.ticket_heure_update AS TIME)),"%T") AS 'duree_traitement' FROM traitement WHERE (traitement.`status` ='termine' OR traitement.`status`='en_traitement') GROUP BY traitement.reception_id;
+
+SELECT * FROM traitement WHERE (traitement.`status`="termine" OR traitement.`status`="transferer") AND traitement.agent_id = -42 AND company_id=1;
+
+SELECT COUNT(traitement.id) AS totalTermine FROM traitement WHERE traitement.`status`="termine" AND traitement.agent_id = -46 AND company_id=1;
+
+SELECT COUNT(traitement.id) AS totaltransferer FROM traitement WHERE traitement.`status`="transferer" AND traitement.agent_id = -46 AND company_id=1;
+
+SELECT COUNT(traitement.id) AS totalTraitement FROM traitement WHERE traitement.`status`="en_traitement" AND traitement.agent_id = -46 AND company_id=1;

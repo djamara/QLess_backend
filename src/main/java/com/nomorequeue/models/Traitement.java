@@ -4,6 +4,7 @@
  */
 package com.nomorequeue.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,8 +47,9 @@ public class Traitement implements Serializable {
     private String status;
     
     private String commentaire;
-            
+    
     private Date ticket_date_update;
+    
     private Timestamp ticket_heure_update;
     
     private Time duree_traitement;

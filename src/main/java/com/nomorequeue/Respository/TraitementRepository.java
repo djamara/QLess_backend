@@ -7,6 +7,7 @@ package com.nomorequeue.Respository;
 import com.nomorequeue.models.Agent;
 import com.nomorequeue.models.Company;
 import com.nomorequeue.models.Traitement;
+import java.sql.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,6 +22,14 @@ public interface TraitementRepository extends JpaRepository<Traitement, Long> {
     List<Traitement> findByCompanyAndStatus(Company company,String status);
     List<Traitement> findByCompanyAndStatusAndAgent(Company company,String status,Agent agent);
     
+    @Query(value="SELECT * FROM traitement "
+            + "WHERE traitement.status=:status "
+            + "AND traitement.agent_id=:agent_id "
+            + "AND traitement.company_id =:company_id "
+            + "AND traitement.ticket_date_update = :date ",
+    nativeQuery = true)
+    List<Traitement> getByCompanyStatusAgentTicketDate(@Param("company_id") Long company_id, @Param("agent_id") Long agent_id, @Param("status") String status, @Param("date") String date);
+    
     @Query(value="SELECT *,TIME_FORMAT(AVG(cast(traitement.ticket_heure_update AS TIME)),\"%T\") AS duree_traitement "
             + "FROM traitement "
             + "WHERE (traitement.`status` ='termine' OR traitement.`status`='en_traitement') "
@@ -32,9 +41,30 @@ public interface TraitementRepository extends JpaRepository<Traitement, Long> {
     value="SELECT * FROM traitement "
             + "WHERE (traitement.`status`='termine' OR traitement.`status`='transferer') "
             + "AND traitement.agent_id = :agent_id "
-            + "AND company_id= :company_id",
+            + "AND company_id= :company_id "
+            + "AND WEEK(traitement.ticket_date_update)= WEEK(:date) ",
     nativeQuery = true)
-    List<Traitement> getAllTerminAndTransf(@Param("company_id") Long company_id, @Param("agent_id") Long agent_id);
+    List<Traitement> getAllTerminAndTransf(@Param("company_id") Long company_id, @Param("agent_id") Long agent_id,@Param("date") String date);
+    
+    @Query(value="SELECT COUNT(id) as nombre, traitement.`status`, traitement.agent_id "
+             + "FROM traitement "
+             + "WHERE WEEK(traitement.ticket_date_update)= WEEK(:date) "
+             + "AND company_id= :company_id "
+             + "GROUP BY traitement.status", 
+            nativeQuery = true)
+    List<Object> countWeeklyrecp(@Param("company_id") Long company , @Param("date") String date);
+    
+    @Query(value = "SELECT COUNT(id) as nombre, "
+            + "traitement.status, traitement.agent_id, "
+            + "DAYNAME(traitement.ticket_date_update) AS nameDay  "
+            + "FROM traitement "
+            + "WHERE traitement.agent_id = :agent_id "
+            + "AND company_id= :company_id "
+            + "AND WEEK(traitement.ticket_date_update)= WEEK(:date) "
+            + "GROUP BY traitement.status, "
+            + "traitement.agent_id, DAYNAME(traitement.ticket_date_update)",
+            nativeQuery = true)
+    List<Object> countWeeklyrecpDaily(@Param("company_id") Long company ,@Param("agent_id") Long agent_id, @Param("date") String date);
     
     
     

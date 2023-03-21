@@ -74,11 +74,19 @@ public class TraitementController {
         return trait_crud.findByCompanyAndStatusAndAgent(company,status,agent);
     }
     
+    @GetMapping("get-company-traitement-by-agent-status-date")
+    public List<Traitement> getAllTraiteByCompanyAnd(@RequestParam Long idcompany,@RequestParam String status,@RequestParam Long idagent, @RequestParam String date){
+        //Company company = this.company_crud.findById(idcompany).get() ;
+        //Agent agent = this.agent_crud.findById(idagent).get();
+        //return trait_crud.findByCompany(company);
+        return trait_crud.getByCompanyStatusAgentTicketDate(idcompany,idagent,status,date);
+    }
+    
     @GetMapping("get-company-traitement-termAndTransf")
-    public List<Traitement> getAllTermAndTransf(@RequestParam Long idcompany,@RequestParam Long idagent){
+    public List<Traitement> getAllTermAndTransf(@RequestParam Long idcompany,@RequestParam Long idagent,@RequestParam String date){
         //Company company = this.company_crud.findById(idcompany).get() ;
         //return trait_crud.findByCompany(company);
-        return trait_crud.getAllTerminAndTransf(idcompany,idagent);
+        return trait_crud.getAllTerminAndTransf(idcompany,idagent,date);
     }
     
     @GetMapping("get-company-traitement")
@@ -91,5 +99,19 @@ public class TraitementController {
     @GetMapping("get-company-traitement-termine")
     public List<Traitement> getAllTraitTermine(){
         return trait_crud.getAllTraitTermine();
+    }
+    
+    @GetMapping("count-weekly-traitement-detail")
+    public List<Object> countWeeklyrecp(@RequestParam Long idcompany,@RequestParam String date){
+        //Company company = this.company_crud.findById(idcompany).get() ;
+        return trait_crud.countWeeklyrecp(idcompany,date);
+        //return crud.getReceptionByCompany(idcompany);
+    }
+    
+    @GetMapping("count-weekly-traitement-detail-daily")
+    public List<Object> countWeeklyDayrecp(@RequestParam Long idcompany,@RequestParam Long idagent,@RequestParam String date){
+        //Company company = this.company_crud.findById(idcompany).get() ;
+        return trait_crud.countWeeklyrecpDaily(idcompany,idagent,date);
+        //return crud.getReceptionByCompany(idcompany);
     }
 }
